@@ -1,0 +1,355 @@
+:root {
+  /* Aerospace / Mission Control Palette */
+  --color-bg-base: #0a0f16;
+  --color-bg-panel: #111822;
+  --color-bg-panel-header: #172230;
+  
+  --color-border: #1e2d3d;
+  --color-border-subtle: #17212e;
+  
+  --color-text-primary: #e2e8f0;
+  --color-text-secondary: #8b9bb4;
+  --color-text-muted: #4a5d73;
+  
+  --color-accent-blue: #0ea5e9;
+  --color-accent-blue-dim: rgba(14, 165, 233, 0.2);
+  
+  --color-status-pass: #10b981; /* Green */
+  --color-status-warn: #f59e0b; /* Amber */
+  --color-status-fail: #ef4444; /* Red */
+  --color-status-offline: #64748b;
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+  
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  
+  --shadow-panel: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme='light'] {
+  /* Aerospace / Mission Control Light Palette */
+  --color-bg-base: #EEF1F4;
+  --color-bg-panel: #F7F9FB;
+  --color-bg-panel-secondary: #FFFFFF;
+  --color-bg-panel-header: #E8EDF2;
+  --color-header-bg: #F3F5F7;
+  
+  --color-border: #B8C2CC;
+  --color-border-strong: #8E9AA6;
+  --color-border-subtle: #C5CDD5;
+  
+  --color-text-primary: #18212B;
+  --color-text-secondary: #536170;
+  --color-text-muted: #7B8794;
+  
+  --color-accent-blue: #356D9B;
+  --color-accent-blue-dim: rgba(53, 109, 155, 0.1);
+  
+  /* Status Colors */
+  --color-status-pass: #00A878;
+  --color-status-warn: #C98900;
+  --color-status-fail: #D83A3A;
+  --color-status-info: #356D9B;
+  --color-status-offline: #7B8794;
+  
+  /* Controls */
+  --color-control-bg: #FFFFFF;
+  --color-control-border: #AEB8C2;
+  --color-control-bg-disabled: #E8EDF2;
+  
+  /* Nav */
+  --color-nav-bg-active: #E1E7EC;
+  --color-nav-border-active: #9EABB7;
+  
+  --shadow-panel: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Utilities */
+.text-green { color: var(--color-status-pass); }
+.text-amber { color: var(--color-status-warn); }
+.text-red { color: var(--color-status-fail); }
+.text-muted { color: var(--color-text-muted); }
+.text-blue { color: var(--color-accent-blue); }
+
+.mono { font-family: var(--font-mono); }
+
+/* Components */
+.panel {
+  background-color: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panel-header {
+  background-color: var(--color-bg-panel-header);
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-content {
+  padding: 12px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.data-row:last-child {
+  border-bottom: none;
+}
+
+.data-label {
+  color: var(--color-text-secondary);
+}
+
+.data-value {
+  font-family: var(--font-mono);
+  color: var(--color-text-primary);
+}
+
+/* uPlot Overrides */
+.uplot {
+  font-family: var(--font-mono) !important;
+}
+.u-legend {
+  font-size: 11px !important;
+  color: var(--color-text-secondary) !important;
+}
+.u-value {
+  color: var(--color-text-primary) !important;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-right: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  margin-top: 1px;
+}
+
+.nav-button:hover {
+  background-color: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+}
+
+.nav-button.active {
+  background-color: var(--color-nav-bg-active, var(--color-bg-panel));
+  border: 1px solid var(--color-nav-border-active, var(--color-border));
+  border-bottom: 2px solid var(--color-accent-blue);
+  color: var(--color-text-primary);
+}
+
+.form-control {
+  background-color: var(--color-control-bg, var(--color-bg-base));
+  border: 1px solid var(--color-control-border, var(--color-border));
+  color: var(--color-text-primary);
+  border-radius: var(--radius-sm);
+  padding: 2px 4px;
+}
+
+.form-control:disabled {
+  background-color: var(--color-control-bg-disabled, var(--color-bg-base));
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.form-button {
+  background-color: var(--color-bg-panel-header);
+  border: 1px solid var(--color-control-border, var(--color-border));
+  color: var(--color-text-muted);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.form-button:disabled {
+  background-color: var(--color-control-bg-disabled, var(--color-bg-base));
+  cursor: not-allowed;
+}
+
+/* Aerospace Status Indicator */
+.status-indicator {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-panel);
+  padding: 2px 6px;
+  min-width: 90px;
+  box-shadow: var(--shadow-panel);
+}
+
+.status-indicator-header {
+  font-size: 8px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: 2px;
+  padding-bottom: 1px;
+  text-transform: uppercase;
+}
+
+.status-indicator-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Run/Pause/Stop Buttons */
+.mission-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.1s;
+}
+.mission-button:hover:not(:disabled) {
+  background-color: var(--color-bg-panel-header);
+}
+.mission-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.mission-button.active-run {
+  border-color: var(--color-status-pass);
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--color-status-pass);
+}
+.mission-button.active-pause {
+  border-color: var(--color-status-warn);
+  background-color: rgba(245, 158, 11, 0.1);
+  color: var(--color-status-warn);
+}
+.mission-button.active-stop {
+  border-color: var(--color-status-fail);
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--color-status-fail);
+}
+
+/* Engineering Form Select */
+.eng-select {
+  appearance: none;
+  background-color: var(--color-control-bg);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 3px 20px 3px 6px;
+  border-radius: var(--radius-sm);
+  width: 100%;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24' fill='none' stroke='%237B8794' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+}
+.eng-select:focus {
+  border-color: var(--color-accent-blue);
+  outline: none;
+}
+.eng-select:disabled {
+  background-color: var(--color-control-bg-disabled);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.eng-input {
+  background-color: var(--color-control-bg);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: var(--radius-sm);
+  width: 100%;
+}
+.eng-input:focus {
+  border-color: var(--color-accent-blue);
+  outline: none;
+}
+.eng-input:disabled {
+  background-color: var(--color-control-bg-disabled);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.eng-button {
+  background-color: var(--color-bg-panel-header);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.eng-button:hover:not(:disabled) {
+  background-color: var(--color-bg-panel);
+  border-color: var(--color-accent-blue);
+}
+.eng-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,0 +1,55 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+MemoryCaptures/
+
+# Unity IDE / generated files
+.vs/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Frontend dependencies / build output
+dashboard/frontend/node_modules/
+dashboard/frontend/dist/
+
+# Python
+dashboard/backend/__pycache__/
+dashboard/backend/.pytest_cache/
+dashboard/backend/venv/
+
+# Secrets / environment
+.env
+.env.*
+*.key
+*.pem
+
+# Logs and local test outputs
+*.log
+
+AttachLog*.txt
+FinalMetrics.txt
+Summary.txt
+build_errors.txt
+
+# Benchmark/test videos
+dashboard/backend/temp_videos/
+
+# Unity generated solution
+*.slnx
+
+# Local VS Code settings
+.vscode/settings.json
+.vscode/launch.json
