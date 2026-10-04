@@ -74,8 +74,13 @@ namespace FSOC.Telemetry
 
             try
             {
-                await _webSocket.ConnectAsync(new Uri(serverUrl), _cancellationTokenSource.Token);
-                Debug.Log($"[TelemetryPublisher] Connection established to {serverUrl}");
+                var environmentUrl = Environment.GetEnvironmentVariable("UNITY_TELEMETRY_WS_URL");
+                var endpoint = string.IsNullOrWhiteSpace(environmentUrl)
+                    ? "wss://sih26-sync-fsoc.onrender.com/ws/telemetry"
+                    : environmentUrl;
+                Debug.Log($"[TelemetryPublisher] Using WebSocket URL: {endpoint}");
+                await _webSocket.ConnectAsync(new Uri(endpoint), _cancellationTokenSource.Token);
+                Debug.Log($"[TelemetryPublisher] Connection established to {endpoint}");
             }
             catch (Exception)
             {

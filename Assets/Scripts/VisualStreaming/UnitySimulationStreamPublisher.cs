@@ -122,7 +122,12 @@ public class UnitySimulationStreamPublisher : MonoBehaviour
 
         try
         {
-            await ws.ConnectAsync(new Uri(websocketUrl), cts.Token);
+            var environmentUrl = Environment.GetEnvironmentVariable("UNITY_SIMULATION_WS_URL");
+            var endpoint = string.IsNullOrWhiteSpace(environmentUrl)
+                ? "wss://sih26-sync-fsoc.onrender.com/ws/simulation"
+                : environmentUrl;
+            Debug.Log($"[UnitySimulationStreamPublisher] Using WebSocket URL: {endpoint}");
+            await ws.ConnectAsync(new Uri(endpoint), cts.Token);
         }
         catch (Exception)
         {
