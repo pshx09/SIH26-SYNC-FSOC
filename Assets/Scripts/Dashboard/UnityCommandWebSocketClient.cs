@@ -93,6 +93,7 @@ namespace FSOC.Dashboard
     {
         public bool enableCommands = true;
         public string serverUrl = "ws://127.0.0.1:8000/ws/commands/unity";
+        private const string LocalServerUrl = "ws://127.0.0.1:8000/ws/commands/unity";
 
         private ClientWebSocket _webSocket;
         private CancellationTokenSource _cancellationTokenSource;
@@ -150,8 +151,12 @@ namespace FSOC.Dashboard
 
             try
             {
-                await _webSocket.ConnectAsync(new Uri(serverUrl), _cancellationTokenSource.Token);
-                Debug.Log($"[CommandClient] Connected to {serverUrl}");
+                var environmentUrl = Environment.GetEnvironmentVariable("UNITY_COMMAND_WS_URL");
+                var endpoint = !string.IsNullOrWhiteSpace(environmentUrl)
+                    ? environmentUrl
+                    : !string.IsNullOrWhiteSpace(serverUrl) ? serverUrl : LocalServerUrl;
+                await _webSocket.ConnectAsync(new Uri(endpoint), _cancellationTokenSource.Token);
+                Debug.Log($"[CommandClient] Connected to {endpoint}");
                 _ = ReceiveLoop();
             }
             catch (Exception)
