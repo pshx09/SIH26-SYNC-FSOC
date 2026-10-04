@@ -16,8 +16,8 @@ export function MissionShell() {
 
   useEffect(() => {
     // Connect telemetry once at the top level
-    telemetryStore.connect('ws://127.0.0.1:8000/ws/dashboard');
-    commandChannel.connect('ws://127.0.0.1:8000/ws/commands/frontend');
+    telemetryStore.connect();
+    commandChannel.connect();
   }, []);
 
   const renderMode = () => {

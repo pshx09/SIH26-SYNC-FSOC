@@ -1,3 +1,5 @@
+import { COMMAND_WS_URL } from './backendUrls';
+
 export interface CommandPayload {
     [key: string]: any;
 }
@@ -31,7 +33,7 @@ class CommandChannel {
     
     private nextId = 1;
 
-    public connect(url: string = 'ws://127.0.0.1:8000/ws/commands/frontend') {
+    public connect(url: string = COMMAND_WS_URL) {
         if (this.ws || this.isConnecting) return;
         this.isConnecting = true;
 

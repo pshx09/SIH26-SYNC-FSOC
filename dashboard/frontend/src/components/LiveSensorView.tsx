@@ -1,8 +1,9 @@
 import { useBinaryImageStream } from '../services/useBinaryImageStream';
+import { backendWebSocketUrl } from '../services/backendUrls';
 import type { DashboardTelemetry } from '../types/telemetry';
 
 export function LiveSensorView({ telemetry }: { telemetry: DashboardTelemetry | null }) {
-  const { imageSrc, status, fps, frameSize } = useBinaryImageStream('ws://127.0.0.1:8000/ws/sensor-view');
+  const { imageSrc, status, fps, frameSize } = useBinaryImageStream(backendWebSocketUrl('/ws/sensor-view'));
 
   const isDetectionValid = telemetry && telemetry.isDetected;
   

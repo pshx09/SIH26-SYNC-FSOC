@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from 'react';
 import type { RawUnityTelemetry, DashboardTelemetry, TrackingStatus } from '../types/telemetry';
+import { backendWebSocketUrl } from './backendUrls';
 
 type Listener = () => void;
 
@@ -82,7 +83,7 @@ class TelemetryStore {
   // Maximum number of snapshots to keep in memory (e.g., 15 seconds at 15Hz = 225)
   private readonly MAX_HISTORY = 225;
 
-  public connect(url: string = 'ws://127.0.0.1:8000/ws/dashboard') {
+  public connect(url: string = backendWebSocketUrl('/ws/dashboard')) {
     if (this.ws || this.isConnecting) return;
     this.isConnecting = true;
 

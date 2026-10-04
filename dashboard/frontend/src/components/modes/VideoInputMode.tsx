@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTelemetryData } from '../../services/TelemetryStore';
 import { commandChannel } from '../../services/CommandChannel';
+import { backendApiUrl } from '../../services/backendUrls';
 import { psRequirements } from '../verification/psRequirements';
 
 export function VideoInputMode() {
@@ -43,7 +44,7 @@ export function VideoInputMode() {
         const formData = new FormData();
         formData.append('file', file);
         
-        const response = await fetch('http://localhost:8000/upload_video', {
+        const response = await fetch(backendApiUrl('/upload_video'), {
             method: 'POST',
             body: formData
         });

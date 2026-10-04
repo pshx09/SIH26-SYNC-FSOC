@@ -1,10 +1,11 @@
 import { useBinaryImageStream } from '../services/useBinaryImageStream';
+import { backendWebSocketUrl } from '../services/backendUrls';
 import { commandChannel } from '../services/CommandChannel';
 import { useTelemetryData } from '../services/TelemetryStore';
 import { useState } from 'react';
 
 export function LiveSimulationView() {
-  const { imageSrc, status, fps, frameSize } = useBinaryImageStream('ws://127.0.0.1:8000/ws/simulation-view');
+  const { imageSrc, status, fps, frameSize } = useBinaryImageStream(backendWebSocketUrl('/ws/simulation-view'));
   const telemetry = useTelemetryData();
   const runState = telemetry?.runState || 'UNKNOWN';
   const [pendingCmd, setPendingCmd] = useState('');
